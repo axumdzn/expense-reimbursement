@@ -11,10 +11,16 @@ class ExpenseServiceImp(ExpenseServiceInterface):
         self.expense_dao = expense_dao
 
     def service_create_expense_report(self, expense: Expense) -> Expense:
-        if 1000.00 < expense.amount < 1.00:
+        if type(expense.amount) is not float:
+            raise BadInput("Enter numerical digits between 1.00 and 1000.00")
+        elif type(expense.category) is not str:
+            raise BadInput("Must choose an expense category")
+        elif type(expense.description) is not str:
+            raise BadInput("Expense description must be 100 characters or less")
+        elif 1000.00 < expense.amount < 1.00:
             raise BadInput("Expense amount must be between 1000.00 and 1.00")
         elif expense.category == " ":
-            raise BadInput("Must choose and expense category")
+            raise BadInput("Must choose an expense category")
         elif len(expense.description) > 100:
             raise BadInput("Expense description must be 100 characters or less")
         return self.expense_dao.create_expense_report(expense)
