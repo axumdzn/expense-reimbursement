@@ -1,6 +1,16 @@
 from flask import Flask, jsonify, request
 
+from dal.expense_dal.expense_dao_imp import ExpenseDAOImp
+from dal.employee_data_access.employee_dao_impl import EmployeeDAOImp
+from entities.expenses import Expense
+from service.employee_service.employee_service_imp import EmployeeServiceImp
+from service.expenses.expense_imp import ExpenseServiceImp
+
 app = Flask(__name__)
+employee_dao = EmployeeDAOImp()
+employee_service = EmployeeServiceImp(employee_dao)
+expense_dao = ExpenseDAOImp()
+expense_service = ExpenseServiceImp(expense_dao)
 
 
 @app.route("/api/employee", methods=["GET"])
@@ -10,7 +20,15 @@ def employee_login():
 
 @app.route("/api/expense", methods=["POST"])
 def create_expense():
-    pass
+    data: dict = request.get_json()
+    expense = Expense(data["expenseId"], data["amount"], data["category"], data["description"], data["employeeId"])
+    global expense_service
+    result = expense_service.service_create_expense_report(expense)
+    if result.amount == data["amount"]:
+        data["expenseId"] = result.expense_id
+        return jsonify(data), 200
+    else:
+        return jsonify(result), 400
 
 
 @app.route("/api/expense/<expense_id>", methods=["DELETE"])
