@@ -1,5 +1,5 @@
-
-
+from custom_exception.bad_input import BadInput
+from dal.expense_dal.expense_dao_imp import ExpenseDAOImp
 from entities.expenses import Expense
 from util.manage_connection import connection
 from service.expenses.expense_interface import ExpenseServiceInterface
@@ -7,30 +7,24 @@ from service.expenses.expense_interface import ExpenseServiceInterface
 
 class ExpenseServiceImp(ExpenseServiceInterface):
 
-    def service_create_expense_report(self, expense: Expense) -> Expense:
-        sql = "insert into expense report(default,%s,%s,%s,default) returning expense_id"
-        cursor = connection.cursor()
-        cursor.exceute(sql, (expense.amount, expense.category, expense.description))
-        connection.commit()
-        new_expense_id = cursor.fetchone()[0]
-        expense.expanse_id = new_expense_id
-        return expense
+    def __int__(self, expense_dao: ExpenseDAOImp):
+        self.expense_dao = expense_dao
 
-    def service_get_total_expense_by_id(self, employee_id: int) -> list[Expense]:
-        sql = "select * from expenses"
-        cursor = connection.cursor()
-        cursor.exceute(sql)
-        expense_records = cursor.fetchall()
-        expense_list = []
-        for employee_id in expense_records:
-            employee = Expense(*employee_id)
-            expense_list.append(employee)
-        return sum(expense_list)
+    def service_create_expense_report(self, expense: Expense) -> Expense:
+        if 1000.00 < expense.amount < 1.00:
+            raise BadInput("Expense amount must be between 1000.00 and 1.00")
+        elif expense.category == " ":
+            raise BadInput("Must choose and expense category")
+        elif len(expense.description) > 100:
+            raise BadInput("Expense description must be 100 characters or less")
+        return self.expense_dao.create_expense_report(expense)
+
+    def service_get_total_expense_by_id(self, employee_id: int) -> float:
+        if type(employee_id) is not int:
+            raise BadInput("Please enter valid employee ID")
+        return self.expense_dao.get_total_expenses_by_id(employee_id)
 
     def service_expense_delete(self, expense_id: int) -> bool:
-        sql = "delete from expense where expense_id = %s"
-        cursor = connection.cursor()
-        cursor.exceute(sql, [expense_id])
-        connection.commit()
-        return True
-
+        if type(expense_id) is not int:
+            raise BadInput("Please enter valid employee ID")
+        return self.expense_dao.delete_expense_report_by_id(expense_id)
