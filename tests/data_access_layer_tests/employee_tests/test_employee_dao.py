@@ -1,5 +1,5 @@
 from custom_exception.bad_input import BadInput
-from data_access_layer.employee_data_access.employee_dao_impl import EmployeeDAOImp
+from dal.employee_data_access.employee_dao_impl import EmployeeDAOImp
 
 employee_dao = EmployeeDAOImp()
 

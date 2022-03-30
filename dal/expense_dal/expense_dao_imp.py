@@ -22,3 +22,7 @@ class ExpenseDAOImp(ExpenseDAOInterface):
         # returned_id = cursor.fetchone()[0]
         # expense.employee_id = returned_id
         return expense
+
+
+    def get_total_expenses_by_id(self, employee_id: int) -> float:
+        pass

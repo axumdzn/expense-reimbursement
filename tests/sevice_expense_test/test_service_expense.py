@@ -1,5 +1,6 @@
 from unittest.mock import MagicMock
 
+from entities.expenses import Expense
 from service.expenses.expense_imp import ExpenseServiceImp
 
 expense_dao = ExpenseDAOImp()
