@@ -1,5 +1,5 @@
 from custom_exception.bad_input import BadInput
-from data_access_layer.employee_data_access.employee_dao_interface import EmployeeDAOInterface
+from dal.employee_data_access.employee_dao_interface import EmployeeDAOInterface
 from entities.employee import Employee
 from util.manage_connection import connection
 
