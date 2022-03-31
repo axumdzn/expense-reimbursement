@@ -38,7 +38,16 @@ def delete_expense_by_id():
 
 @app.route("/api/expense/<expense_id>", methods=["GET"])
 def get_total_expenses_by_id():
-    pass
+    data: dict = request.get_json()
+    expense_employee_id = Expense(data["employee_id"])
+    global expense_service
+    result = expense_service.service_get_total_expense_by_id(expense)
+    if result.employee_id == data["employee_id"]:
+        for expense_employee_id in data:
+            total = 0
+            total += result.amount
+            return jsonify(total), 200
+
 
 
 app.run()
