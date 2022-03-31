@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 
+from custom_exception.bad_input import BadInput
 from dal.expense_dal.expense_dao_imp import ExpenseDAOImp
 from dal.employee_data_access.employee_dao_impl import EmployeeDAOImp
 from entities.expenses import Expense
@@ -32,8 +33,12 @@ def create_expense():
 
 
 @app.route("/api/expense/<expense_id>", methods=["DELETE"])
-def delete_expense_by_id():
-    pass
+def delete_expense_by_id(expense_id: str):
+    expense_id = int(expense_id)
+    result = expense_service.service_expense_delete(expense_id)
+    result_dictionary = {"result": result}
+    result_json = jsonify(result_dictionary)
+    return result_json, 200
 
 
 @app.route("/api/expense/<expense_id>", methods=["GET"])
