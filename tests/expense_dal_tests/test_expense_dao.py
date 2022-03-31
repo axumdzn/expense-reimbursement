@@ -1,3 +1,4 @@
+from custom_exception.bad_input import BadInput
 from dal.expense_dal.expense_dao_imp import ExpenseDAOImp
 from entities.expenses import Expense
 
