@@ -54,18 +54,15 @@ def delete_expense_by_id(expense_id: str):
     return result_json, 200
 
 
-@app.route("/api/expense/<expense_id>", methods=["GET"])
-def get_total_expenses_by_id():
-    data: dict = request.get_json()
-    expense_employee_id = Expense(data["employee_id"])
+@app.route("/api/expense/<employee_id>", methods=["GET"])
+def get_total_expenses_by_id(employee_id: str):
+    employee_data = int(employee_id)
     global expense_service
-    result = expense_service.service_get_total_expense_by_id(expense)
-    if result.employee_id == data["employee_id"]:
-        for expense_employee_id in data:
-            total = 0
-            total += result.amount
-            return jsonify(total), 200
-
+    result = expense_service.service_get_total_expense_by_id(employee_data)
+    if type(result) is float:
+        return jsonify({"total": result}), 200
+    else:
+        return jsonify(result), 400
 
 
 app.run()
