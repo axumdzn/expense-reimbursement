@@ -1,17 +1,19 @@
 from unittest.mock import MagicMock
 
 from custom_exception.bad_input import BadInput
+from dal.employee_data_access.employee_dao_impl import EmployeeDAOImp
 from entities.employee import Employee
 from service.employee_service.employee_service_imp import EmployeeServiceImp
 
-employee_service = EmployeeServiceImp()
+employee_dao = EmployeeDAOImp()
+employee_service = EmployeeServiceImp(employee_dao)
 
 
 def test_service_employee_login_success():
-    username = "joejoe"
+    username = "jefferson"
     password = "password"
     result = employee_service.service_employee_login(username,password)
-    assert result.name == "Joe"
+    assert result.first_name == "Thomas"
 
 
 def test_service_employee_login_username_not_string():
@@ -35,7 +37,7 @@ def test_service_employee_login_password_not_string():
 
 
 def test_service_employee_login_mock_success():
-    employee_service.service_employee_login.employee_login = MagicMock(return_value=Employee(1, "Joe", "Smith", "joejoe", "password"))
+    employee_service.employee_dao.dao_employee_login = MagicMock(return_value=Employee(1, "Joe", "Smith", "joejoe", "password"))
     result = employee_service.service_employee_login("joecool", "hasta_la_pasta")
     assert result.username == "joejoe"
 
