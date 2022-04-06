@@ -1,13 +1,12 @@
 from custom_exception.bad_input import BadInput
 from dal.expense_dal.expense_dao_imp import ExpenseDAOImp
 from entities.expenses import Expense
-from util.manage_connection import connection
 from service.expenses.expense_interface import ExpenseServiceInterface
 
 
 class ExpenseServiceImp(ExpenseServiceInterface):
 
-    def __int__(self, expense_dao: ExpenseDAOImp):
+    def __init__(self, expense_dao: ExpenseDAOImp):
         self.expense_dao = expense_dao
 
     def service_create_expense_report(self, expense: Expense) -> Expense:
@@ -17,7 +16,7 @@ class ExpenseServiceImp(ExpenseServiceInterface):
             raise BadInput("Must choose an expense category")
         elif type(expense.description) is not str:
             raise BadInput("Expense description must be 100 characters or less")
-        elif 1000.00 < expense.amount < 1.00:
+        elif expense.amount > 1000.0 or expense.amount < 1.0:
             raise BadInput("Expense amount must be between 1000.00 and 1.00")
         elif expense.category == " ":
             raise BadInput("Must choose an expense category")

@@ -12,9 +12,11 @@ class EmployeeDAOImp(EmployeeDAOInterface):
         cursor.execute(sql, [username])
         connection.commit()
         employee = cursor.fetchone()
+        if cursor.rowcount == 0:
+            raise BadInput("wrong username or password")
         employee_data = Employee(*employee)
         if employee_data.password != password:
-            raise BadInput("wrong username or password: please try again")
+            raise BadInput("wrong username or password")
         else:
             return employee_data
 

@@ -10,23 +10,20 @@ expense_dao = ExpenseDAOImp()
 # Test to cancel expense request
 
 def test_create_expense_report_success():
-    expense = Expense(1, 2.2, "gas", "Comment", 1)
+    expense = Expense(0, 2.2, "travel", "Comment", 1)
     result_expense = expense_dao.create_expense_report(expense)
     assert result_expense.employee_id == 1
 
 
-def test_create_expense_report_failure():
-    try:
-        expense = Expense(1, "john", "gas", "Comment", 1)
-        result_expense = expense_dao.create_expense_report(expense)
-        assert False
-    except BadInput as e:
-        assert str(e) == "Invalid information entered"
+def test_create_expense_report_unique_id():
+    expense = Expense(1, 1000, "travel", "Comment", 1)
+    result_expense = expense_dao.create_expense_report(expense)
+    assert result_expense.expense_id > 1
 
 
 def test_get_total_expenses_by_id_success():
     result_expense = expense_dao.get_total_expenses_by_id(1)
-    assert result_expense == 1000
+    assert result_expense > 4000.0
 
 
 def test_get_total_expenses_by_id_failure():
@@ -38,15 +35,13 @@ def test_get_total_expenses_by_id_failure():
 
 
 def test_delete_expense_report_success():
-    expense = Expense(1, 2.2, "gas", "Comment", 1)
-    result_expense = expense_dao.delete_expense_report(expense)
-    assert result_expense.employee_id == 1
+    result_expense = expense_dao.delete_expense_report_by_id(2)
+    assert True
 
 
 def test_delete_expense_report_failure():
     try:
-        expense = Expense(1, "john", "mileage", "Comment", 1)
-        result_expense = expense_dao.delete_expense_report(expense)
+        result_expense = expense_dao.delete_expense_report_by_id(-1)
         assert False
     except BadInput as e:
         assert str(e) == "Invalid information entered"

@@ -5,10 +5,10 @@ employee_dao = EmployeeDAOImp()
 
 
 def test_dao_employee_login_success():
-    username = "Thomas Jefferson"
+    username = "jefferson"
     password = "password"
     result = employee_dao.dao_employee_login(username, password)
-    assert result.username == "Thomas Jefferson"
+    assert result.username == "jefferson"
 
 
 def test_dao_employee_login_password_wrong():
@@ -18,4 +18,4 @@ def test_dao_employee_login_password_wrong():
         result = employee_dao.dao_employee_login(username, password)
         assert False
     except BadInput as e:
-        assert str(e) != "wrong username or password"
+        assert str(e) == "wrong username or password"
