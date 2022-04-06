@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Reinbursement</title>
+    <title>Expense Reimbursement</title>
 </head>
 <body>
     <h1 id="totalExpense"></h1>
-    <button type="submit" onclick="" id="logout"></button>
+    <button type="submit" onclick="" id="total">Refresh Total</button>
+    <button type="submit" onclick="" id="logout">Logout</button>
     <div id="expense">
         <input type="number" name="amount" id="amount">
         <input type="text" name="category" id="category">
         <input type="text" name="description" id="description">
-        <button type="submit" id="createbtn"></button>
+        <button type="submit" id="createbtn">Submit</button>
     </div>
+    <button type="submit" id="deletePrevious">Delete Previous</button>
     <script src="../js/logout.js"></script>
     <script src="../js/createExpense.js"></script>
     <script src="../js/totalExpenses.js"></script>
