@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Reimbursement</title>
+</head>
+<body>
+    <h1 id="totalExpense"></h1>
+    <button type="submit" onclick="getTotal()" id="total">Refresh Total</button>
+    <button type="submit" onclick="logOutButton()" id="logout">Logout</button>
+    <div id="expense">
+        <input type="number" name="amount" id="amount">
+        <input type="text" name="category" id="category">
+        <input type="text" name="description" id="description">
+        <button type="submit" id="createbtn" onclick="createExpense()">Submit</button>
+    </div>
+    <button type="submit" id="deletePrevious" onclick="deletePrevious()">Delete Previous</button>
+    <script src="../js/logout.js"></script>
+    <script src="../js/createExpense.js"></script>
+    <script src="../js/totalExpenses.js"></script>
+    <script src="../js/delete.js"></script>
+</body>
+</html>

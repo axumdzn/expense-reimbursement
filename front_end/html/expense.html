@@ -5,18 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Reimbursement</title>
+    
+    <style>
+
+        body{
+            text-align: center;
+        }
+        button{
+            padding: 5px 10px;
+        }
+
+       
+
+        div.buttonCreatebtn input, div.buttonCreatebtn span {
+        
+        margin-left: 50px;
+        
+        }
+        
+    </style>
+        <link rel="stylesheet" href="../css/main.css">
+    
+    
 </head>
 <body>
-    <h1 id="totalExpense"></h1>
-    <button type="submit" onclick="getTotal()" id="total">Refresh Total</button>
-    <button type="submit" onclick="logOutButton()" id="logout">Logout</button>
-    <div id="expense">
-        <input type="number" name="amount" id="amount">
-        <input type="text" name="category" id="category">
-        <input type="text" name="description" id="description">
-        <button type="submit" id="createbtn" onclick="createExpense()">Submit</button>
+    <div class="box">
+
+        <h3>Expense Reimbursement Home Page</h3>
+        
+        <div id="expense">
+            
+            <h6>Expense Amount</h6>
+            <input type="number" name="amount" id="amount">
+            <h6>Expense Category</h6>
+            <select name="category" id="category">
+                <option value="travel">Travel</option>
+                <option value="food">Food</option>
+                <option value="office">Office</option>
+                <option value="equipment">Equipment</option>
+                <option value="other">Other</option>
+            </select>
+            <!-- <input type="text" name="category" id="category"> -->
+            <h6>Expense Description</h6>
+            <input type="text" name="description" id="description">
+            <button type="submit" id="createbtn" onclick="createExpense()">Submit</button>
+            <h6>Total Expense: </h6>
+            <h6 id = "totalExpense"></h6>
+            
+        </div>
+        <button type="submit" id="deletePrevious" onclick="deletePrevious()">Delete Previous</button>
+        <button type="submit" onclick="getTotal()" id="total">Refresh Total</button>
+        <button type="submit" onclick="logOutButton()" id="logout">Logout</button>
     </div>
-    <button type="submit" id="deletePrevious" onclick="deletePrevious()">Delete Previous</button>
     <script src="../js/logout.js"></script>
     <script src="../js/createExpense.js"></script>
     <script src="../js/totalExpenses.js"></script>
