@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Reimbursement</title>
+    
+    <style>
+
+        body{
+            text-align: center;
+        }
+        button{
+            padding: 5px 10px;
+        }
+
+       
+
+        div.buttonCreatebtn input, div.buttonCreatebtn span {
+        
+        margin-left: 50px;
+        
+        }
+        
+    </style>
+        <link rel="stylesheet" href="main.css">
+    
+    
+</head>
+<body>
+    <h3>Expense Reimbursement Home Page</h3>
+
+    <h1 id="totalExpense"></h1>
+    <button type="submit" onclick="" id="total">Refresh Total</button>
+    <button type="submit" onclick="" id="logout">Logout</button>
+    <div id="expense">
+
+        <h6>Expense Amount</h6>
+        <input type="number" name="amount" id="amount">
+        <h6>Expense Category</h6>
+        <input type="text" name="category" id="category">
+        <h6>Expense Description</h6>
+        <input type="text" name="description" id="description">
+        <button type="submit" id="createbtn">Submit</button>
+        <h6>Total Expense: </h6>
+        <h6 id = "totalExpense"></h6>
+
+    </div>
+    <button type="submit" id="deletePrevious">Delete Previous</button>
+    <script src="../js/logout.js"></script>
+    <script src="../js/createExpense.js"></script>
+    <script src="../js/totalExpenses.js"></script>
+</body>
+</html>
