@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
-from custom_exception.bad_input import BadInput
 from dal.expense_dal.expense_dao_imp import ExpenseDAOImp
 from dal.employee_data_access.employee_dao_impl import EmployeeDAOImp
 from entities.employee import Employee
@@ -8,14 +8,16 @@ from entities.expenses import Expense
 from service.employee_service.employee_service_imp import EmployeeServiceImp
 from service.expenses.expense_imp import ExpenseServiceImp
 
+
 app = Flask(__name__)
+CORS(app)
 employee_dao = EmployeeDAOImp()
 employee_service = EmployeeServiceImp(employee_dao)
 expense_dao = ExpenseDAOImp()
 expense_service = ExpenseServiceImp(expense_dao)
 
 
-@app.route("/api/employee", methods=["GET"])
+@app.route("/api/employee", methods=["POST"])
 def employee_login():
     employee_data = request.get_json()
     login_credentials = employee_service.service_employee_login(employee_data["username"], employee_data["password"])
@@ -35,10 +37,10 @@ def employee_login():
 @app.route("/api/expense", methods=["POST"])
 def create_expense():
     data: dict = request.get_json()
-    expense = Expense(data["expenseId"], data["amount"], data["category"], data["description"], data["employeeId"])
+    expense = Expense(data["expenseId"], float(data["amount"]), data["category"], data["description"], data["employeeId"])
     global expense_service
     result = expense_service.service_create_expense_report(expense)
-    if result.amount == data["amount"]:
+    if result.amount == float(data["amount"]):
         data["expenseId"] = result.expense_id
         return jsonify(data), 200
     else:
@@ -60,7 +62,7 @@ def get_total_expenses_by_id(employee_id: str):
     global expense_service
     result = expense_service.service_get_total_expense_by_id(employee_data)
     if type(result) is float:
-        return jsonify({"total": result}), 200
+        return jsonify({"amount": result}), 200
     else:
         return jsonify(result), 400
 

@@ -1,10 +1,11 @@
 
-const employeeidInput = document.getElementById();
 const totalh1 = document.getElementById("totalExpense");
-
+// all functions need the correct routes in order to function
 async function getTotal(){
+    const employeeInfo = JSON.parse(localStorage.getItem('employee'))
+    console.log(employeeInfo.employeeId);
     const response = await fetch(
-        `http://localhost:5000/${employeeidInput.value}`, 
+        `http://127.0.0.1:5000/api/expense/${employeeInfo["employeeId"]}`, 
         {
             method: "GET"
         }
@@ -16,3 +17,5 @@ async function getTotal(){
         alert("Please enter correct employee ID");
     }
 }
+
+getTotal()

@@ -8,17 +8,18 @@
 </head>
 <body>
     <h1 id="totalExpense"></h1>
-    <button type="submit" onclick="" id="total">Refresh Total</button>
-    <button type="submit" onclick="" id="logout">Logout</button>
+    <button type="submit" onclick="getTotal()" id="total">Refresh Total</button>
+    <button type="submit" onclick="logOutButton()" id="logout">Logout</button>
     <div id="expense">
         <input type="number" name="amount" id="amount">
         <input type="text" name="category" id="category">
         <input type="text" name="description" id="description">
-        <button type="submit" id="createbtn">Submit</button>
+        <button type="submit" id="createbtn" onclick="createExpense()">Submit</button>
     </div>
-    <button type="submit" id="deletePrevious">Delete Previous</button>
+    <button type="submit" id="deletePrevious" onclick="deletePrevious()">Delete Previous</button>
     <script src="../js/logout.js"></script>
     <script src="../js/createExpense.js"></script>
     <script src="../js/totalExpenses.js"></script>
+    <script src="../js/delete.js"></script>
 </body>
 </html>

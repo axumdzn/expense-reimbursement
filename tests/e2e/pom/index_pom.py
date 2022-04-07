@@ -52,3 +52,6 @@ class ExpenseHome:
     def total_expense(self):
         element: WebElement = self.driver.find_element(By.ID, "totalExpense")
         return element
+
+    def get_alert(self):
+        return self.driver.switch_to.alert
