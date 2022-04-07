@@ -82,7 +82,9 @@ Create table Employees(
 	expense_id: serial primary key,
 	amount dec(5,2),
 	category varchar(20),
-	description varchar(100)
+	description varchar(100),
+	employee_id int,
+	CONSTRAINT employee_fk FOREIGN KEY(employee_id) REFERENCES employees(employee_id)
 );
 ```
 ## User Stories
