@@ -41,7 +41,3 @@ def test_service_employee_login_mock_success():
     result = employee_service.service_employee_login("joecool", "hasta_la_pasta")
     assert result.username == "joejoe"
 
-
-# will write when the completed version of the employee dao is written completely
-def test_service_employee_login_mock_failure():
-    pass

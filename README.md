@@ -25,6 +25,9 @@ This application was designed so that a company's employees can submit expense r
 - Employee can delete their request while the application is open on the off chance that they messed up
 
 **to do**
+- Add Managers to sign off on expense requests and delete them
+- Allowing the employee to see a list of all their expenses after logging in
+- 
 
 ## Getting Started
 - to clone:

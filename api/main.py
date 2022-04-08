@@ -31,7 +31,7 @@ def employee_login():
         }
         return jsonify(result), 200
     else:
-        return jsonify(login_credentials), 400
+        return jsonify({"error": "Incorrect username or password"}), 400
 
 
 @app.route("/api/expense", methods=["POST"])
