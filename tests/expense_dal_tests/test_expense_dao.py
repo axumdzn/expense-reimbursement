@@ -35,7 +35,7 @@ def test_get_total_expenses_by_id_failure():
 
 
 def test_delete_expense_report_success():
-    result_expense = expense_dao.delete_expense_report_by_id(2)
+    result_expense = expense_dao.delete_expense_report_by_id(25)
     assert True
 
 
